@@ -14,8 +14,8 @@ export default async function handler(req, res) {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        // モデル名を安定して利用可能な「Claude 3.5 Sonnet」に変更
-        model: 'claude-3-5-sonnet-20241022',
+        // 指定されたモデル名に戻す
+        model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
         system: 'あなたはプロのライターです。指示されたフォーマットに厳密に従い、挨拶や解説なしで回答のみを出力してください。',
         messages: [
