@@ -102,8 +102,8 @@ ${theme2 ? '\nもうひとつは、[テーマ2の100字程度の紹介文]\n' : 
 
             if (!response.ok) {
                 console.error("API Error:", data);
-                if (data.error && data.error.message) {
-                    throw new Error(`APIエラー: ${data.error.message}`);
+                if (data.error) {
+                    throw new Error(`【詳細エラー】\nタイプ: ${data.error.type}\nメッセージ: ${data.error.message}\n(※この画面全体をコピーして教えてください)`);
                 }
                 throw new Error('APIリクエストに失敗しました。APIキーが正しいか確認してください。');
             }
