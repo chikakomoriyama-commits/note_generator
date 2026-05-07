@@ -85,24 +85,14 @@ ${theme2 ? '\nもうひとつは、[テーマ2の100字程度の紹介文]\n' : 
 ・申込み：${link}`;
 
         try {
-            const response = await fetch('https://api.anthropic.com/v1/messages', {
+            const response = await fetch('/api/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'x-api-key': apiKey,
-                    'anthropic-version': '2023-06-01',
-                    'anthropic-dangerously-allow-browser': 'true'
                 },
                 body: JSON.stringify({
-                    model: 'claude-sonnet-4-20250514',
-                    max_tokens: 1000,
-                    system: 'あなたはプロのライターです。指示されたフォーマットに厳密に従い、挨拶や解説なしで回答のみを出力してください。',
-                    messages: [
-                        {
-                            role: 'user',
-                            content: systemPrompt
-                        }
-                    ]
+                    apiKey: apiKey,
+                    systemPrompt: systemPrompt
                 })
             });
 
@@ -110,10 +100,10 @@ ${theme2 ? '\nもうひとつは、[テーマ2の100字程度の紹介文]\n' : 
 
             if (!response.ok) {
                 console.error("API Error:", data);
-                if (data.error && data.error.type === 'not_found_error' && data.error.message.includes('model')) {
-                    throw new Error(`モデル名エラー: ${data.error.message}。\n※指定された「claude-sonnet-4-20250514」は現在利用できない可能性があります。`);
+                if (data.error && data.error.message) {
+                    throw new Error(`APIエラー: ${data.error.message}`);
                 }
-                throw new Error(data.error?.message || 'APIリクエストに失敗しました。APIキーが正しいか確認してください。');
+                throw new Error('APIリクエストに失敗しました。APIキーが正しいか確認してください。');
             }
 
             const generatedText = data.content[0].text;
