@@ -1,0 +1,9 @@
+#!/usr/bin/expect -f
+set timeout -1
+spawn ~/bin/gh auth login -w -p https -h github.com
+expect -re "Authenticate Git.*"
+send "y\r"
+expect -re {([A-Z0-9]{4}-[A-Z0-9]{4})}
+set code $expect_out(1,string)
+puts "\n\n=== CODE: $code ===\n\n"
+interact
