@@ -24,9 +24,14 @@
             <div class="card setup-card">
                 <h3><span class="icon">🔑</span> API設定</h3>
                 <div class="form-group">
-                    <label for="apiKey">Claude API キー</label>
+                    <label for="apiKey">Claude API キー <span class="required">必須</span></label>
                     <input type="password" id="apiKey" placeholder="sk-ant-api03-..." required>
                     <small>※APIキーはブラウザ上でのみ使用され、外部に保存されることはありません。</small>
+                </div>
+                <div class="form-group">
+                    <label for="modelName">モデル名 <span class="optional">任意</span></label>
+                    <input type="text" id="modelName" value="claude-3-5-sonnet-20241022" placeholder="claude-3-5-sonnet-20241022">
+                    <small>※講座などで指定のモデル名がある場合はここを変更してください。</small>
                 </div>
             </div>
 

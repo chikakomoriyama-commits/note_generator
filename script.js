@@ -38,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Get values
         const apiKey = document.getElementById('apiKey').value.trim();
+        const modelName = document.getElementById('modelName').value.trim();
         const month = document.getElementById('month').value.trim();
         const theme1 = document.getElementById('theme1').value.trim();
         const theme2 = document.getElementById('theme2').value.trim();
@@ -92,6 +93,7 @@ ${theme2 ? '\nもうひとつは、[テーマ2の100字程度の紹介文]\n' : 
                 },
                 body: JSON.stringify({
                     apiKey: apiKey,
+                    modelName: modelName,
                     systemPrompt: systemPrompt
                 })
             });

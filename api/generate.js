@@ -3,7 +3,7 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: { message: 'Method not allowed' } });
   }
 
-  const { apiKey, systemPrompt } = req.body;
+  const { apiKey, modelName, systemPrompt } = req.body;
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -14,8 +14,7 @@ export default async function handler(req, res) {
         'anthropic-version': '2023-06-01',
       },
       body: JSON.stringify({
-        // 指定されたモデル名に戻す
-        model: 'claude-sonnet-4-20250514',
+        model: modelName || 'claude-3-5-sonnet-20241022',
         max_tokens: 1000,
         system: 'あなたはプロのライターです。指示されたフォーマットに厳密に従い、挨拶や解説なしで回答のみを出力してください。',
         messages: [
